@@ -1,0 +1,8 @@
+SPY
+AA
+GE
+GS
+IBM
+KR
+TWTR
+XOM
