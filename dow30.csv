@@ -1,19 +1,21 @@
 Symbol,Name
-AXP,American Express Co
 AAPL,Apple Inc
+AXP,American Express Co
 BA,Boeing Co
 CAT,Caterpillar Inc
 CSCO,Cisco Systems Inc
 CVX,Chevron Corp
-XOM,Exxon Mobil Corp
+DIA,Index
+DIS,Walt Disney Co
+DWDP,DowDuPont Inc
 GE,General Electric Co
 GS,Goldman Sachs Group Inc
 HD,Home Depot Inc
 IBM,International Business Machines Corp
 INTC,Intel Corp
 JNJ,Johnson & Johnson
-KO,Coca-Cola Co
 JPM,JPMorgan Chase & Co
+KO,Coca-Cola Co
 MCD,McDonald's Corp
 MMM,3M Co
 MRK,Merck & Co Inc
@@ -24,8 +26,7 @@ PG,Procter & Gamble Co
 TRV,Travelers Companies Inc
 UNH,UnitedHealth Group Inc
 UTX,United Technologies Corp
-VZ,Verizon Communications Inc
 V,Visa Inc
+VZ,Verizon Communications Inc
 WMT,Walmart Inc
-DIS,Walt Disney Co
-DWDP,DowDuPont Inc
+XOM,Exxon Mobil Corp

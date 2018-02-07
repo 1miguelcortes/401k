@@ -1,6 +1,6 @@
 #!/bin/bash
 
-filename='dow30.csv'
+filename='sp500.txt'
 
 echo "Start loading yahoo finance daily prices...$filename"
 
@@ -15,3 +15,4 @@ echo "Start loading yahoo finance daily prices...$filename"
 	    #sleep 2;
 	done	
 } < $filename
+
