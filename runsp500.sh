@@ -1,6 +1,6 @@
 #!/bin/bash
 
-filename='sp500.txt'
+filename='sp500.csv'
 
 echo "Start loading yahoo finance daily prices...$filename"
 

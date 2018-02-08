@@ -26,3 +26,20 @@ get_param:{[p]
 frmt_handle:{[h]
   hsym `$h / convert string to q handle
   }
+
+
+/
+  ps - parameter keys
+  str - usage string, e.e. "q tp -p 5000 -tp_path /tmp"
+  return - nothing 
+\
+check_params:{[ps;str]
+  ps:(),ps;
+
+  if[ 0b; 
+    .log.error "Needto provide all params.";
+    .log.info "Usage: \n\t",str;
+    exit 1;
+  ];
+
+ };
