@@ -1,4 +1,5 @@
 Symbol,Security,SEC filings,GICS Sector,GICS Sub Industry,Address of Headquarters,Date first added,CIK
+SPY,Index,ETF
 MMM,3M Company,reports,Industrials,Industrial Conglomerates,"St. Paul, Minnesota",,66740
 ABT,Abbott Laboratories,reports,Health Care,Health Care Equipment,"North Chicago, Illinois",3/31/1964,1800
 ABBV,AbbVie Inc.,reports,Health Care,Pharmaceuticals,"North Chicago, Illinois",12/31/2012,1551152
@@ -70,7 +71,7 @@ BK,The Bank of New York Mellon Corp.,reports,Financials,Asset Management & Custo
 BAX,Baxter International Inc.,reports,Health Care,Health Care Equipment,"Deerfield, Illinois",9/30/1972,10456
 BBT,BB&T Corporation,reports,Financials,Regional Banks,"Winston-Salem, North Carolina",,92230
 BDX,Becton Dickinson,reports,Health Care,Health Care Equipment,"Franklin Lakes, New Jersey",9/30/1972,10795
-BRK.B,Berkshire Hathaway,reports,Financials,Multi-Sector Holdings,"Omaha, Nebraska",2/16/2010,1067983
+BRK-B,Berkshire Hathaway,reports,Financials,Multi-Sector Holdings,"Omaha, Nebraska",2/16/2010,1067983
 BBY,Best Buy Co. Inc.,reports,Consumer Discretionary,Computer & Electronics Retail,"Richfield, Minnesota",6/29/1999,764478
 BIIB,Biogen Inc.,reports,Health Care,Biotechnology,"Weston, Massachusetts",,875045
 BLK,BlackRock,reports,Financials,Asset Management & Custody Banks,"New York, New York",4/4/2011,1364742
@@ -82,7 +83,7 @@ BSX,Boston Scientific,reports,Health Care,Health Care Equipment,"Marlborough, Ma
 BHF,Brighthouse Financial Inc,reports,Financials,Life & Health Insurance,"Charlotte, North Carolina",8/8/2017,1685040
 BMY,Bristol-Myers Squibb,reports,Health Care,Health Care Distributors,"New York, New York",,14272
 AVGO,Broadcom,reports,Information Technology,Semiconductors,"San Jose, California",5/8/2014,1441634
-BF.B,Brown-Forman Corp.,reports,Consumer Staples,Distillers & Vintners,"Louisville, Kentucky",10/31/1982,14693
+BF-B,Brown-Forman Corp.,reports,Consumer Staples,Distillers & Vintners,"Louisville, Kentucky",10/31/1982,14693
 CHRW,C. H. Robinson Worldwide,reports,Industrials,Air Freight & Logistics,"Eden Prairie, Minnesota",3/2/2007,1043277
 CA,"CA, Inc.",reports,Information Technology,Systems Software,"Islandia, New York",7/31/1987,356028
 COG,Cabot Oil & Gas,reports,Energy,Oil & Gas Exploration & Production,"Houston, Texas",6/23/2008,858470
