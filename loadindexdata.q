@@ -37,23 +37,43 @@ yr5:"D"$"." sv (string d.year-5;"01";"01");
 yr10:"D"$"." sv (string d.year-10;"01";"01");
 
 / load all S&P data
-spdaily:loaddata[0;syms];
+indexdaily:loaddata[0;syms];
 
-update AdjClose:spdaily`$"Adj Close" from `spdaily;
-update retdaily:log(AdjClose%prev AdjClose) from `spdaily;
-indexlast:select by Sym from spdaily;
+/ short-term return: same day 0d, 1d, 1w, 1m, 6m
+indexdailyret:raze {
+ msg:"" sv ("xxxx compute ";string y;" day return for `";string x);
+ .log.info msg;
+ data:update ret0d:log(Close%Open), rethl:log(High%Low), ret1d:log(AdjClose%prev AdjClose) from select from `indexdaily where Sym=x;
+ data
+ }[;1] each syms;
+
+indexlast:select by Sym from `indexdailyret;
 
 
-indexytd:select yr0days:count i, yr0adv:floor avg Volume, yr0start:first Date, yr0end:max Date, retytd:log(last AdjClose%first AdjClose) by Sym from spdaily where Date>=yr0;
-index1yr:select yr1days:count i, yr1adv:floor avg Volume, yr1start:first Date, yr1end:last Date, ret1yr:0.2*log(last AdjClose%first AdjClose) by Sym from spdaily where Date within (yr1;yr0);
-index5yr:select yr5days:count i, yr5adv:floor avg Volume, yr5start:first Date, yr5end:last Date, ret5yr:0.2*log(last AdjClose%first AdjClose) by Sym from spdaily where Date within (yr5;yr0);
-index10yr:select yr10days:count i, yr10adv:floor avg Volume, yr10start:first Date, ytd10end:last Date, ret10yr:0.1*log(last AdjClose%first AdjClose) by Sym from spdaily where Date within (yr10;yr0);
+index5d:raze {
+ msg:"" sv ("xxxx compute ";string y;" day return for `";string x);
+ .log.info msg;
+ / get each of 5th day from current date
+ data:select count i, AdjClosePrices:AdjClose, last Date by Sym, ret5d:6 xbar i from (-360#select from `indexdailyret where Sym=x);
+ data:update ret5d:{ log((last x)%(first x)) } each AdjClosePrices from data;
+ 0!(-1#data) / just output the latest date
+ }[;5] each syms;
 
-indexall:indexytd lj `Sym xkey index1yr lj `Sym xkey index5yr lj `Sym xkey index10yr;
-indexstats:select Date, Sym, Close, AdjClose, Volume, retdaily, retytd, ret5yr, ret10yr, yr5start, yr10start from (indexlast lj `Sym xkey indexall);
-/ indexstats
+index30d:raze {
+ msg:"" sv ("xxxx compute ";string y;" day return for `";string x);
+ .log.info msg;
+ data:select count i, AdjClosePrices:AdjClose, last Date by Sym, ret30d:30 xbar i from (-360#select from `indexdailyret where Sym=x);
+ data:update ret30d:{ log((last x)%(first x)) } each AdjClosePrices from data;
+ 0!(-1#data) / just output the latest date
+ }[;30] each syms;
 
-/ select from indexstats where Sym=`SPY
+indexytd:select retytd:log(last AdjClose%first AdjClose), ytddays:count i, ytdadv:floor avg Volume, ytdstart:first Date, ytdend:max Date by Sym from indexdailyret where Date>=yr0;
+index1yr:select ret1yr:0.2*log(last AdjClose%first AdjClose), yr1days:count i, yr1adv:floor avg Volume, yr1start:first Date, yr1end:last Date by Sym from indexdailyret where Date within (yr1;yr0);
+index5yr:select ret5yr:0.2*log(last AdjClose%first AdjClose), yr5days:count i, yr5adv:floor avg Volume, yr5start:first Date, yr5end:last Date by Sym from indexdailyret where Date within (yr5;yr0);
+index10yr:select ret10yr:0.1*log(last AdjClose%first AdjClose), yr10days:count i, yr10adv:floor avg Volume, yr10start:first Date, ytd10end:last Date by Sym from indexdailyret where Date within (yr10;yr0);
+
+indexretall:indexlast lj `Sym xkey index5d lj `Sym xkey index30d lj `Sym xkey indexytd lj `Sym xkey index1yr lj `Sym xkey index5yr lj `Sym xkey index10yr;
+indexstats:select Date, Sym, Open, High, Low, Close, AdjClose, Volume, ret0d, ret1d, ret5d, ret30d, retytd, ret1yr, ret5yr, ret10yr, yr5start, yr10start from / indexretall
 
 
 \c 50 1000
