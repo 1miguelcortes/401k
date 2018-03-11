@@ -59,7 +59,7 @@ index5d:raze {
  / get each of 5th day from current date
  data:select days:count i, AdjClosePrices:AdjClose, dailyret:ret1d, last Date, last AdjClose, dailyHL5days:ret0dhl by Sym, ret5d:5 xbar i from (-360#select from `indexdailyret where Sym=x);
  / data:update ret5d:{ log((last x)%(first x)) } each AdjClosePrices from data;
- data:update vol5d:stdev5d*sqrt(252), volhl5d:dailyHLstdev5days*sqrt(252) from update ret5d:log(AdjClose%prev AdjClose), stdev5d:{dev x} each dailyret, dailyHLstdev5days:{sqrt((1.0%(4*5*log(2)))*(sum(x*x)))} each dailyHL5days from data;
+ data:update vol5d:stdev5d*sqrt(252), vol5dhl:dailyHLstdev5days*sqrt(252) from update ret5d:log(AdjClose%prev AdjClose), stdev5d:{dev x} each dailyret, dailyHLstdev5days:{sqrt((1.0%(4*5*log(2)))*(sum(x*x)))} each dailyHL5days from data;
  0!-1#data 
  }[;5] each syms;
 
@@ -68,7 +68,7 @@ index30d:raze {
  msg:"" sv ("xxxx compute ";string y;" day return for `";string x);
  .log.info msg;
  data:select days:count i, AdjClosePrices:AdjClose, dailyret:ret1d, last Date, last AdjClose, dailyHL30days:ret0dhl by Sym, ret30d:30 xbar i from (-360#select from `indexdailyret where Sym=x);
- data:update vol30d:stdev30d*sqrt(252), volhl30d:dailyHLstdev30days*sqrt(252) from update ret30d:log(AdjClose%prev AdjClose), stdev30d:{dev x} each dailyret, dailyHLstdev30days:{sqrt((1.0%(4*30*log(2)))*(sum(x*x)))} each dailyHL30days from data;
+ data:update vol30d:stdev30d*sqrt(252), vol30dhl:dailyHLstdev30days*sqrt(252) from update ret30d:log(AdjClose%prev AdjClose), stdev30d:{dev x} each dailyret, dailyHLstdev30days:{sqrt((1.0%(4*30*log(2)))*(sum(x*x)))} each dailyHL30days from data;
  0!(-1#data) / just output the latest date
  }[;30] each syms;
 
