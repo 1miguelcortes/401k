@@ -1,4 +1,4 @@
-Symbol,Security,SEC filings,GICS Sector,GICS Sub Industry,Address of Headquarters,Date first added,CIK
+Symbol,Name,SEC filings,GICS Sector,GICS Sub Industry,Address of Headquarters,Date first added,CIK
 SPY,Index,ETF
 MMM,3M Company,reports,Industrials,Industrial Conglomerates,"St. Paul, Minnesota",,66740
 ABT,Abbott Laboratories,reports,Health Care,Health Care Equipment,"North Chicago, Illinois",3/31/1964,1800

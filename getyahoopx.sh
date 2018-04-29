@@ -78,3 +78,15 @@ log "URL: $URL"
 curl -s --cookie $cookieJar  $URL > data/$SYMBOL.csv
 
 echo "Data dowmloaded to $SYMBOL.csv"
+
+STATS_URL="https://query2.finance.yahoo.com/v10/finance/quoteSummary/$SYMBOL?formatted=true&lang=en-US&region=US&modules=summaryProfile%2CfinancialData%2CdefaultKeyStatistics%2C&corsDomain=finance.yahoo.com"
+log $STATS_URL
+
+# Add the crumb value
+URL="$STATS_URL&crumb=$crumb"
+log "URL: $URL"
+
+# Download to 
+curl -s --cookie $cookieJar  $URL > stats/$SYMBOL.json
+
+echo "Data dowmloaded to $SYMBOL.json"

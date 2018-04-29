@@ -78,6 +78,6 @@ URL="$BASE_URL&crumb=$crumb"
 log "URL: $URL"
 
 # Download to 
-curl -s --cookie $cookieJar  $URL > statistics/$SYMBOL.json
+curl -s --cookie $cookieJar  $URL > stats/$SYMBOL.json
 
 echo "Data dowmloaded to $SYMBOL.json"

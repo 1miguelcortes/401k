@@ -11,7 +11,7 @@ echo "Start loading yahoo finance daily prices...$filename"
 	do	
 	    echo "ticker $symbol "
 	    ./getyahoopx.sh $symbol
-
+	    
 	    #sleep 2;
 	done	
 } < $filename
