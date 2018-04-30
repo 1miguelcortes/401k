@@ -8,10 +8,12 @@ spstate:select count i, distinct Symbol by State from (update State:{`$last "," 
 indexfile:frmt_handle get_param`index;
 show indexfile;
 
+spwiki:update Symbol:{`$ssr[string x;".";"-"]} each Symbol from spwiki;
 
 / read index tickers
 tickers:("SS";enlist ",")0: indexfile;
-syms:exec Symbol from tickers where not Name like "Index*";
+/ syms:exec Symbol from tickers where not Name like "Index*";
+syms:?[indexfile like "*dow*";exec Symbol from tickers where not Name like "Index*";exec Symbol from spwiki where not Name like "Index*"];
 
 loadstatsfiles:{[ndays;stocks] 
  tbl:(); / initialize results table
@@ -121,7 +123,7 @@ statsAll2:update marketCap:floor sharesOutstanding2*currentPrice2 from
 tcols:();
 {if [x like "*2";tcols::tcols,`$x] }each string cols statsAll2;
 
-statsAllOut:(`Sym`marketCap,tcols)#statsAll2;
+statsAllOut:(`Sym`currentPrice2`targetMeanPrice2`Weeks52Change2`marketCap,tcols)#statsAll2;
 
 / model 1: 
 potentialReturn:`potentialReturn xdesc `Sym`marketCap`potentialReturn`currentPrice2`targetMeanPrice2`Weeks52Change2 xcols update potentialReturn:log(targetMeanPrice2%currentPrice2) from statsAllOut; 

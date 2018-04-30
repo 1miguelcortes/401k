@@ -45,4 +45,4 @@ yahoo:{[ndays;stocks]
 
 / https://en.wikipedia.org/wiki/List_of_S%26P_500_companies#Recent_changes_to_the_list_of_S&P_500_Components
 
-he:httpsGet["en.wikipedia.org"; "/wiki/List_of_S%26P_500_companies#Recent_changes_to_the_list_of_S&P_500_Components"];
+/ he:httpsGet["en.wikipedia.org"; "/wiki/List_of_S%26P_500_companies#Recent_changes_to_the_list_of_S&P_500_Components"];
