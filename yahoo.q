@@ -40,3 +40,9 @@ yahoo:{[ndays;stocks]
   ];
  tbl: select from tbl where not null Volume; / get rid of rows with nulls
  `Date`Sym xasc tbl} / order by date and stock
+
+/ ha:httpGet["en.wikipedia.org"; "/wiki/List_of_S%26P_500_companies"]
+
+/ https://en.wikipedia.org/wiki/List_of_S%26P_500_companies#Recent_changes_to_the_list_of_S&P_500_Components
+
+he:httpsGet["en.wikipedia.org"; "/wiki/List_of_S%26P_500_companies#Recent_changes_to_the_list_of_S&P_500_Components"];

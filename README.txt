@@ -29,3 +29,8 @@ https://github.com/t4joel/machine-learning/blob/master/kdb/pyq-market-prediction
 
 IMPL - https://code.kx.com/q/github/
 
+data:(`$":http://www.football-data.co.uk") "GET /mmz4281/1314/E0.csv http/1.0\r\nhost:www.football-data.co.uk\r\n\r\n"
+(" SSSIIIIII IIIIIIIIIIII"; ",") 0:data
+
+data:(`$":http://www.football-data.co.uk") "GET /mmz4281/1314/E0.csv http/1.0\r\nhost:www.football-data.co.uk\r\n\r\n"
+(" SSSIIIIII IIIIIIIIIIII"; ",") 0:data

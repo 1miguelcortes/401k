@@ -1,6 +1,8 @@
 \l log.q
 \l utils.q
 
+/ t:("SSSSSSDI";enlist ",")0: `:csv/sp500wiki.csv
+
 indexfile:frmt_handle get_param`index;
 show indexfile;
 
