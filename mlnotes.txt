@@ -1,4 +1,11 @@
 mlnotes.txt
 
 An Introduction to Deep Learning for Tabular Data - 29 Apr 2018 Rachel Thomas
+
 http://www.fast.ai/2018/04/29/categorical-embeddings/
+
+https://github.com/fastai/fastai
+
+fastai.structured: this module works with Pandas DataFrames, is not dependent on PyTorch, and can be used separately from the rest of the fastai library to process and work with tabular data.
+fastai.column_data: this module also works with Pandas DataFrames, and provides methods to convert DataFrames (with both continuous and categorical variables) into ModelData objects that can easily be used when training neural networks. It also includes an implementation for creating embeddings of categorical variables, a powerful technique I will explain below.
+

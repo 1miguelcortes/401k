@@ -1,7 +1,9 @@
 \l log.q
 \l utils.q
 
-/ t:("SSSSSSDI";enlist ",")0: `:csv/sp500wiki.csv
+spwiki:xcol[`Symbol`Name`SEC`Sector`Industry`Address`DateFirstAdd`CIK;("SSSSSSDI";enlist ",")0: `:csv/sp500wiki.csv];
+spstate:select count i, distinct Symbol by State from (update State:{`$last "," vs string x} each Address from spwiki);
+/ t:xcol[`$ssr[;" ";""]each string cols t;t];
 
 indexfile:frmt_handle get_param`index;
 show indexfile;
