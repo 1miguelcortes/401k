@@ -53,7 +53,6 @@ def parse_html_table(table):
 
 
 # Make the GET request to a url
-SP500 = "http://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
 DOW30 = "https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average"
 r = requests.get(DOW30)
 # Extract the content
@@ -79,3 +78,30 @@ df = parse_html_table(htable)
 print(df.head())
 
 df.to_csv("csv/dow30.csv", index=False)
+
+SP500 = "http://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+r = requests.get(SP500)
+# Extract the content
+c = r.content
+#print(c)
+
+# Create a soup object
+soup = BeautifulSoup(c)
+# Find the element on the webpage
+#main_content = soup.find('div', attrs = {'class': 'entry-content'})
+# Extract the relevant information as text
+#content = main_content.find('ul').text
+# Create a pattern to match names
+#name_pattern = re.compile(r'^([A-Z]{1}.+?)(?:,)', flags = re.M)
+# Find all occurrences of the pattern
+#names = name_pattern.findall(content)
+
+
+htable = soup.find('table', {'class': 'wikitable sortable'})
+#print(htable)
+
+df = parse_html_table(htable)
+print(df.head())
+
+df.to_csv("csv/sp500.csv", index=False)
+
