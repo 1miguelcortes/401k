@@ -1,19 +1,19 @@
 \l log.q
 \l utils.q
 
-spwiki:xcol[`Symbol`Name`SEC`Sector`Industry`Address`DateFirstAdd`CIK;("SSSSSSDI";enlist ",")0: `:csv/sp500wiki.csv];
-spstate:select count i, distinct Symbol by State from (update State:{`$last "," vs string x} each Address from spwiki);
+sp500:xcol[`Symbol`Name`SEC`Sector`Industry`Address`DateFirstAdd`CIK;("SSSSSSDI";enlist ",")0: `:csv/sp500.csv];
+spstate:select count i, distinct Symbol by State from (update State:{`$last "," vs string x} each Address from sp500);
 / t:xcol[`$ssr[;" ";""]each string cols t;t];
 
 indexfile:frmt_handle get_param`index;
 show indexfile;
 
-spwiki:update Symbol:{`$ssr[string x;".";"-"]} each Symbol from spwiki;
+sp500:update Symbol:{`$ssr[string x;".";"-"]} each Symbol from sp500;
 
 / read index tickers
-tickers:("SS";enlist ",")0: indexfile;
-/ syms:exec Symbol from tickers where not Name like "Index*";
-syms:?[indexfile like "*dow*";exec Symbol from tickers where not Name like "Index*";exec Symbol from spwiki where not Name like "Index*"];
+tickers:?[indexfile like "*dow30*";("SSSSDS";enlist ",")0: indexfile;sp500];
+syms:exec Symbol from tickers;
+/ syms:?[indexfile like "*dow*";exec Symbol from tickers where not Name like "Index*";exec Symbol from spwiki where not Name like "Index*"];
 
 loadstatsfiles:{[ndays;stocks] 
  tbl:(); / initialize results table
