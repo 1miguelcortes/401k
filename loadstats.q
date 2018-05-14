@@ -1,17 +1,19 @@
 \l log.q
 \l utils.q
 
-sp500:xcol[`Symbol`Name`SEC`Sector`Industry`Address`DateFirstAdd`CIK;("SSSSSSDI";enlist ",")0: `:csv/sp500.csv];
-spstate:select count i, distinct Symbol by State from (update State:{`$last "," vs string x} each Address from sp500);
-/ t:xcol[`$ssr[;" ";""]each string cols t;t];
-
 indexfile:frmt_handle get_param`index;
 show indexfile;
 
+sp500:xcol[`Symbol`Name`SEC`Sector`Industry`Address`DateFirstAdd`CIK;("SSSSSSDI";enlist ",")0: `:csv/sp500.csv];
 sp500:update Symbol:{`$ssr[string x;".";"-"]} each Symbol from sp500;
+spstate:select count i, distinct Symbol by State from (update State:{`$last "," vs string x} each Address from sp500);
+/ t:xcol[`$ssr[;" ";""]each string cols t;t];
 
 / read index tickers
 tickers:?[indexfile like "*dow30*";("SSSSDS";enlist ",")0: indexfile;sp500];
+tickers:?[indexfile like "*401k*";("SSSSDS";enlist ",")0: indexfile;tickers];
+tickers:?[indexfile like "*etf*";("SSSSDS";enlist ",")0: indexfile;tickers];
+
 syms:exec Symbol from tickers;
 / syms:?[indexfile like "*dow*";exec Symbol from tickers where not Name like "Index*";exec Symbol from spwiki where not Name like "Index*"];
 
@@ -124,6 +126,10 @@ tcols:();
 {if [x like "*2";tcols::tcols,`$x] }each string cols statsAll2;
 
 statsAllOut:(`Sym`currentPrice2`targetMeanPrice2`Weeks52Change2`marketCap,tcols)#statsAll2;
+
+statsAllOut:`recommendationKey2`mktCapB xcols update mktCapB:`${(string floor x%1000000000),"B"} each marketCap from statsAllOut
+
+/ `recommendationKey2`targetMeanReturn`profitMargins2`returnOnEquity2`mktCapB`totalCashPerShare2 xcols (update targetMeanReturn:log(targetMeanPrice2%currentPrice2), mktCapB:`${(string floor x%1000000000),"B"} each marketCap from statsAllOut)
 
 / model 1: 
 potentialReturn:`potentialReturn xdesc `Sym`marketCap`potentialReturn`currentPrice2`targetMeanPrice2`Weeks52Change2 xcols update potentialReturn:log(targetMeanPrice2%currentPrice2) from statsAllOut; 

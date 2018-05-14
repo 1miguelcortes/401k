@@ -1,5 +1,13 @@
 # 401k
 
+https://plot.ly/python/email-reports/#emailing-plotly-graphs
+http://pbpython.com/pdf-reports.html
+http://pbpython.com/visualization-tools-1.html
+http://pbpython.com/pandas-pivot-report.html
+
+`:dir/myNewFile.psv 0: "," 0: table
+
+
 q)httpGet:{[host;location] (`$":http://",host)"GET ",location," HTTP/1.0\r\nHost:",host,"\r\n\r\n"};
 q)b:httpGet[ "ichart.finance.yahoo.com"; "/table.csv?s=MSFT" ]	
 b:httpGet[ "www.timestored.com"; "/" ]

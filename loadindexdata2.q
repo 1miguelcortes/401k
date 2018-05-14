@@ -86,10 +86,14 @@ index10yr:select ret10yr:0.1*log(last AdjClose%first AdjClose), yr10days:count i
 
 indexretall:indexlast lj `Sym xkey index5d lj `Sym xkey index30d lj `Sym xkey indexytd lj `Sym xkey index1yr lj `Sym xkey index5yr lj `Sym xkey index10yr;
 indexstats:select Date, Sym, Open, High, Low, Close, AdjClose, Volume, ret0doc, ret0dhl, ret1d, ret5d, ret30d, vol5d, vol5dhl, vol30d, vol30dhl, retytd, ret1yr, ret5yr, ret10yr, yr10start from indexretall;
+`:csv/dow30indexstats.csv 0: "," 0: indexstats;
+show "csv/dow30indexstats.csv output data files generated";
 
+dow30dailypx:`Date`Sym`AdjClose#select from indexdaily where Date>=yr0;
+`:csv/dow30dailypx.csv 0: "," 0: dow30dailypx;
+show "csv/dow30dailypx.csv output data files generated";
 
-\c 50 1000
+\\
 
-show indexstats 
 
 
