@@ -85,7 +85,7 @@ index5yr:select ret5yr:0.2*log(last AdjClose%first AdjClose), yr5days:count i, y
 index10yr:select ret10yr:0.1*log(last AdjClose%first AdjClose), yr10days:count i, yr10adv:floor avg Volume, yr10start:first Date, ytd10end:last Date by Sym from indexdailyret where Date within (yr10;yr0);
 
 indexretall:indexlast lj `Sym xkey index5d lj `Sym xkey index30d lj `Sym xkey indexytd lj `Sym xkey index1yr lj `Sym xkey index5yr lj `Sym xkey index10yr;
-indexstats:select Date, Sym, Open, High, Low, Close, AdjClose, Volume, ret0doc, ret0dhl, ret1d, ret5d, ret30d, vol5d, vol5dhl, vol30d, vol30dhl, retytd, ret1yr, ret5yr, ret10yr, yr10start from indexretall;
+indexstats:`retytd xdesc select Date, Sym, AdjClose, retytd, ret1d, ret5d, ret30d, Open, High, Low, Close, Volume, ret0doc, ret0dhl, vol5d, vol5dhl, vol30d, vol30dhl, ret1yr, ret5yr, ret10yr, yr10start from indexretall;
 `:csv/dow30indexstats.csv 0: "," 0: indexstats;
 show "csv/dow30indexstats.csv output data files generated";
 
