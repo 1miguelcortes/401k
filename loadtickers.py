@@ -23,7 +23,7 @@ def parse_html_table(table):
         th_tags = row.find_all('th') 
         if len(th_tags) > 0 and len(column_names) == 0:
             for th in th_tags:
-                column_names.append(th.get_text())
+                column_names.append(th.get_text().strip())
 
     # Safeguard on Column Titles
     if len(column_names) > 0 and len(column_names) != n_columns:
@@ -37,7 +37,7 @@ def parse_html_table(table):
         column_marker = 0
         columns = row.find_all('td')
         for column in columns:
-            df.iat[row_marker,column_marker] = column.get_text()
+            df.iat[row_marker,column_marker] = column.get_text().strip()
             column_marker += 1
         if len(columns) > 0:
             row_marker += 1
@@ -51,57 +51,34 @@ def parse_html_table(table):
     
     return df
 
+def getTickers(url, fname, column_name):
+    r = requests.get(url)
+    # Extract the content
+    c = r.content
+    #print(c)
+
+    # Create a soup object
+    soup = BeautifulSoup(c, 'lxml')
+
+    # Find the element on the webpage
+    htable = soup.find('table', {'class': 'wikitable sortable'})
+    #print(htable)
+
+    df = parse_html_table(htable)
+    print(df.head())
+
+    df = df.sort_values(column_name)
+    # add ticker column on the table
+    #df['ticker'] = df[column_name]
+    df.insert(0, 'ticker', df[column_name])
+    dfcsv = df.iloc[:,[0,1,2]]
+
+    dfcsv.to_csv(fname, index=False)
+
 
 # Make the GET request to a url
 DOW30 = "https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average"
-r = requests.get(DOW30)
-# Extract the content
-c = r.content
-#print(c)
-
-# Create a soup object
-soup = BeautifulSoup(c)
-# Find the element on the webpage
-#main_content = soup.find('div', attrs = {'class': 'entry-content'})
-# Extract the relevant information as text
-#content = main_content.find('ul').text
-# Create a pattern to match names
-#name_pattern = re.compile(r'^([A-Z]{1}.+?)(?:,)', flags = re.M)
-# Find all occurrences of the pattern
-#names = name_pattern.findall(content)
-
-
-htable = soup.find('table', {'class': 'wikitable sortable'})
-#print(htable)
-
-df = parse_html_table(htable)
-print(df.head())
-
-df.to_csv("csv/dow30.csv", index=False)
-
 SP500 = "http://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-r = requests.get(SP500)
-# Extract the content
-c = r.content
-#print(c)
 
-# Create a soup object
-soup = BeautifulSoup(c)
-# Find the element on the webpage
-#main_content = soup.find('div', attrs = {'class': 'entry-content'})
-# Extract the relevant information as text
-#content = main_content.find('ul').text
-# Create a pattern to match names
-#name_pattern = re.compile(r'^([A-Z]{1}.+?)(?:,)', flags = re.M)
-# Find all occurrences of the pattern
-#names = name_pattern.findall(content)
-
-
-htable = soup.find('table', {'class': 'wikitable sortable'})
-#print(htable)
-
-df = parse_html_table(htable)
-print(df.head())
-
-df.to_csv("csv/sp500.csv", index=False)
-
+getTickers(DOW30, 'csv/dow30.csv', 'Symbol')
+getTickers(SP500, 'csv/sp500.csv', 'Ticker symbol')

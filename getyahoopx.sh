@@ -22,9 +22,13 @@ if [[ -z $SYMBOL ]]; then
   echo "Please enter a SYMBOL as the first parameter to this script"
   exit
 fi
-echo "Downloading quotes for $SYMBOL"
+#echo "Downloading quotes for $SYMBOL"
 
 SYMBOL=$(echo $SYMBOL | sed -e 's/\r//g')
+SYMBOL=$(echo $SYMBOL | sed -e 's/\./-/g')
+
+echo "Downloading quotes xxx for $SYMBOL"
+
 
 function log () {
   # To remove logging comment echo statement and uncoment the :
@@ -58,7 +62,7 @@ function getCrumb () {
 URL="https://finance.yahoo.com/quote/$SYMBOL/?p=$SYMBOL"
 log $URL
 crumb=$(getCrumb $URL)
-log $crumb
+# log $crumb
 log "CRUMB: $crumb"
 if [[ -z $crumb ]]; then
   echo "Error finding a valid crumb value"
